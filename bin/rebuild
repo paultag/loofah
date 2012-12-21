@@ -11,3 +11,7 @@ for meta in db.meta.find(meta):
     print "%s/%s/%s:" % (s.dist, s.version, s.suite)
     for x in s.query(spec):
         print " %s" % (x['Package'])
+        x.pop("_id")
+        x['builder'] = None
+        id = db.jobs.insert(x, safe=True)
+        print "  %s" % (id)

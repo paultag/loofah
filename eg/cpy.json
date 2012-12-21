@@ -1,0 +1,9 @@
+[
+    {
+        "version": "unstable",
+        "suite": "main"
+    },
+    {
+        "Build-Depends": "python-all-dev"
+    }
+]

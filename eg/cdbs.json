@@ -1,0 +1,13 @@
+[
+    {},
+    {
+        "$or": [
+            {
+                "Build-Depends": "cdbs"
+            },
+            {
+                "Build-Depends-Indep": "cdbs"
+            }
+        ]
+    }
+]
