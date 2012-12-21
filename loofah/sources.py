@@ -56,6 +56,9 @@ def digest_sources():
 
 class PackageEntry(dict):
     def __init__(self, entry, mangle=True):
+        if mangle:
+            entry = self._mangle(entry)
+
         for key in entry:
             self[key] = entry[key]
 
@@ -90,8 +93,8 @@ class PackageEntry(dict):
                     "file": y[2]
                 } for y in [x.split() for x in entry[key].split("\n")]
             ]
-        for key in entry:
-            self[key] = entry[key]
+
+        return entry
 
 
 class Sources(dict):
@@ -120,6 +123,9 @@ class Sources(dict):
             self.add_entry(PackageEntry(package))
 
     def save(self):
+        base, suite, dist, version = (
+            self.base, self.suite, self.dist, self.version
+        )
         foo = "{dist}/{ver}/{sui}".format(
             dist=dist,
             ver=version,
