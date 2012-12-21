@@ -1,0 +1,12 @@
+#!/usr/bin/env python
+from loofah.core import db
+from loofah.sources import Sources
+import sys
+
+spec = {"Build-Depends": sys.argv[1]}
+
+for meta in db.meta.find():
+    s = Sources(meta)
+    print "%s/%s/%s:" % (s.dist, s.version, s.suite)
+    for x in s.query(spec):
+        print " %s" % (x['Package'])

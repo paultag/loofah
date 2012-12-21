@@ -2,6 +2,7 @@ from loofah.utils import tmpfile
 from loofah.core import get_sources_uri, db, _get_context
 from contextlib import contextmanager
 import urllib2
+import json
 import gzip
 
 
@@ -54,7 +55,11 @@ def digest_sources():
 
 
 class PackageEntry(dict):
-    def __init__(self, entry):
+    def __init__(self, entry, mangle=True):
+        for key in entry:
+            self[key] = entry[key]
+
+    def _mangle(self, entry):
         for key in ['Build-Depends', 'Build-Depends-Indep']:
             if key in entry:
                 entry[key] = [
@@ -91,6 +96,7 @@ class PackageEntry(dict):
 
 class Sources(dict):
     def __init__(self, info):
+        self.info = info
         self.base = "{protocol}{base}".format(**info)
         self.suite = info['suite']
         self.dist = info['distro']
@@ -101,32 +107,42 @@ class Sources(dict):
         self[key] = package
         # print "I: New package: %s" % (key)
 
-    def load(self):
-        pass
-
-    def save(self):
+    def get_table(self):
         base, suite, dist, version = (
             self.base, self.suite, self.dist, self.version
         )
         table = getattr(getattr(getattr(db, dist), version), suite)
-        # XXX: Fix this
+        return table
+
+    def load(self):
+        table = self.get_table()
+        for package in table.find():
+            self.add_entry(PackageEntry(package))
+
+    def save(self):
         foo = "{dist}/{ver}/{sui}".format(
             dist=dist,
             ver=version,
             sui=suite
         )
 
-        db.meta.update({"_id": foo}, {
-            "_id": foo,
-            "base": base,
-            "dist": dist,
-            "version": version,
-            "suite": suite
-        }, True, safe=True)
+        table = self.get_table()
+        obj = self.info
+        obj['_id'] = foo
+        db.meta.update({"_id": foo}, obj, True, safe=True)
 
+        print "Dropping old data"
         table.drop()
+        print "Table dropped, reloading"
 
         for package in self:
             obj = self[package]
             obj['_id'] = obj['Package']
             table.update({"_id": obj['_id']}, obj, True, safe=True)
+
+        print "Updated."
+
+    def query(self, query):
+        table = self.get_table()
+        for package in table.find(query):
+            yield package
