@@ -101,8 +101,32 @@ class Sources(dict):
         self[key] = package
         # print "I: New package: %s" % (key)
 
+    def load(self):
+        pass
+
     def save(self):
         base, suite, dist, version = (
             self.base, self.suite, self.dist, self.version
         )
-        print suite, dist, version, base
+        table = getattr(getattr(getattr(db, dist), version), suite)
+        # XXX: Fix this
+        foo = "{dist}/{ver}/{sui}".format(
+            dist=dist,
+            ver=version,
+            sui=suite
+        )
+
+        db.meta.update({"_id": foo}, {
+            "_id": foo,
+            "base": base,
+            "dist": dist,
+            "version": version,
+            "suite": suite
+        }, True, safe=True)
+
+        table.drop()
+
+        for package in self:
+            obj = self[package]
+            obj['_id'] = obj['Package']
+            table.update({"_id": obj['_id']}, obj, True, safe=True)
