@@ -12,6 +12,7 @@ for meta in db.meta.find(meta):
     for x in s.query(spec):
         print " %s" % (x['Package'])
         x.pop("_id")
-        x['builder'] = None
+        x['taken'] = None
+        x['built'] = False
         id = db.jobs.insert(x, safe=True)
         print "  %s" % (id)
