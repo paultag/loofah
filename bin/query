@@ -3,7 +3,8 @@ from loofah.core import db
 from loofah.sources import Sources
 import sys
 
-spec = {"Build-Depends": sys.argv[1]}
+spec = {"$or": [{"Build-Depends": sys.argv[1]},
+                {"Build-Depends-Indep": sys.argv[1]}]}
 
 for meta in db.meta.find():
     s = Sources(meta)
