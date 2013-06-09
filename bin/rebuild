@@ -7,7 +7,6 @@ import json
 import sys
 
 meta, spec = json.load(open(sys.argv[1], 'r'))
-
 group_id = sys.argv[2]
 
 for meta in db.meta.find(meta):
