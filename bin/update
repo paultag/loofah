@@ -12,8 +12,8 @@ if len(a) > 2:
 
 from loofah.sources import digest_sources
 
-print "Digesting from remote"
+print("Digesting from remote")
 sources = digest_sources()
-print "Saving objects"
+print("Saving objects")
 sources.save()
-print "Done."
+print("Done.")

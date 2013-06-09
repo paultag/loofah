@@ -137,16 +137,16 @@ class Sources(dict):
         obj['_id'] = foo
         db.meta.update({"_id": foo}, obj, True, safe=True)
 
-        print "Dropping old data"
+        print("Dropping old data")
         table.drop()
-        print "Table dropped, reloading"
+        print("Table dropped, reloading")
 
         for package in self:
             obj = self[package]
             obj['_id'] = obj['Package']
             table.update({"_id": obj['_id']}, obj, True, safe=True)
 
-        print "Updated."
+        print("Updated.")
 
     def query(self, query):
         table = self.get_table()
