@@ -1,0 +1,23 @@
+[
+    {
+        "suite": "main",
+        "version": "unstable"
+    },
+    {
+        "Maintainer": "Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>",
+        "Architecture": {
+            "$in": [
+                "all",
+                "any all"
+            ]
+        },
+        "Build-Depends": {
+            "$in": [
+                "python-all-dev",
+                "python3-all-dev",
+                "python-all",
+                "python3-all"
+            ]
+        }
+    }
+]

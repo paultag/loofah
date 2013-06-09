@@ -9,5 +9,6 @@ meta, spec = json.load(open(sys.argv[1], 'r'))
 for meta in db.meta.find(meta):
     s = Sources(meta)
     print("%s/%s/%s:" % (s.dist, s.version, s.suite))
-    for x in s.query(spec):
+    entries = s.query(spec)
+    for x in entries:
         print(" %s" % (x['Package']))
