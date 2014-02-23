@@ -150,5 +150,5 @@ class Sources(dict):
 
     def query(self, query):
         table = self.get_table()
-        for package in table.find(query):
+        for package in table.find(query, timeout=False):
             yield package
