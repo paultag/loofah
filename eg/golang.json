@@ -1,0 +1,14 @@
+[
+    {
+        "suite": "main",
+        "version": "unstable"
+    },
+    {
+        "Build-Depends": {
+            "$in": [
+                "golang",
+                "golang-go"
+            ]
+        }
+    }
+]

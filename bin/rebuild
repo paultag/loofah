@@ -9,11 +9,17 @@ import sys
 meta, spec = json.load(open(sys.argv[1], 'r'))
 group_id = sys.argv[2]
 
+def upload(x, group_id):
+    try:
+        return fetch_and_upload('unstable', x['Package'], x['Version'], **{
+            "X-Lucy-Group": group_id
+        })
+    except Exception:
+        return upload(x, group_id)
+
 for meta in db.meta.find(meta):
     s = Sources(meta)
     print("%s/%s/%s:" % (s.dist, s.version, s.suite))
     for x in s.query(spec):
         print("  Issuing a rebuild for {Package}/{Version}".format(**x))
-        fetch_and_upload('unstable', x['Package'], x['Version'], **{
-            "X-Lucy-Group": group_id
-        })
+        upload(x, group_id)

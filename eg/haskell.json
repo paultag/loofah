@@ -1,0 +1,13 @@
+[
+    {
+        "suite": "main",
+        "version": "unstable"
+    },
+    {
+        "Build-Depends": {
+            "$in": [
+                "ghc"
+            ]
+        }
+    }
+]
