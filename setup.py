@@ -19,6 +19,10 @@ setup(
     author_email="paultag@debian.org",
     long_description=long_description,
     install_requires=install_requires,
+    scripts = ['bin/loofah-nuke',
+               'bin/loofah-query',
+               'bin/loofah-rebuild',
+               'bin/loofah-update']
     description='debile helper to rebuild a set of existing packages',
     license="Expat",
     url="https://github.com/paultag/loofah",
