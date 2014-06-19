@@ -22,7 +22,7 @@ setup(
     scripts = ['bin/loofah-nuke',
                'bin/loofah-query',
                'bin/loofah-rebuild',
-               'bin/loofah-update']
+               'bin/loofah-update'],
     description='debile helper to rebuild a set of existing packages',
     license="Expat",
     url="https://github.com/paultag/loofah",
