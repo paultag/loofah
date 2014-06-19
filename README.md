@@ -5,14 +5,14 @@ loofah will process json files. Some examples are provided in eg/
 # Commands
 
 ## Feed the database
-> PYTHONPATH=. ./bin/update
+> PYTHONPATH=. ./bin/loofah-update
 
 ## Query packages
 Query all packages 'Build-Depends'/'Build-Depends-Indep' on cdbs:
-> PYTHONPATH=. ./bin/query eg/cdbs.json
+> PYTHONPATH=. ./bin/loofah-query eg/cdbs.json
 
 ## Rebuild packages
-> PYTHONPATH=.:../ricky/ ./bin/rebuild eg/cdbs.json default
+> PYTHONPATH=.:../ricky/ ./bin/loofah-rebuild eg/cdbs.json default
 
 # Configuration
 
