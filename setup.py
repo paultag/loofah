@@ -18,9 +18,9 @@ setup(
     author="Paul Tagliamonte",
     author_email="paultag@debian.org",
     long_description=long_description,
-    description='does some stuff with things & stuff',
     install_requires=install_requires,
+    description='debile helper to rebuild a set of existing packages',
     license="Expat",
-    url="",
+    url="https://github.com/paultag/loofah",
     platforms=['any']
 )
