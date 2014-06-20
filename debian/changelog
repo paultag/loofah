@@ -1,5 +1,5 @@
 loofah (0.1-1) unstable; urgency=low
 
-  * Initial release
+  * Initial release (Closes: #752172).
 
- -- Clément Schreiner <clement@mux.me>  Sun, 15 Jun 2014 14:34:58 +0200
+ -- Clément Schreiner <clement@mux.me>  Fri, 20 Jun 2014 15:54:37 +0200
