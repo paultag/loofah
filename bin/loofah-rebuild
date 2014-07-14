@@ -10,12 +10,9 @@ meta, spec = json.load(open(sys.argv[1], 'r'))
 group_id = sys.argv[2]
 
 def upload(x, group_id):
-    try:
-        return fetch_and_upload('unstable', x['Package'], x['Version'], **{
+    return fetch_and_upload('unstable', x['Package'], x['Version'], **{
             "X-Debile-Group": group_id
-        })
-    except Exception:
-        return upload(x, group_id)
+    })
 
 for meta in db.meta.find(meta):
     s = Sources(meta)
